@@ -21,6 +21,10 @@ class PostServiceTest {
     @Autowired
     private PostService postService;
 
+    @BeforeEach
+    public void deleteAll(){
+        postRepository.deleteAll();
+    }
 
     @BeforeEach
     public void setUp(){
@@ -33,6 +37,9 @@ class PostServiceTest {
             post.addComment(Comment.builder()
                             .content("댓글"+i)
                             .build());
+            post.addComment(Comment.builder()
+                    .content("댓글1"+i)
+                    .build());
             posts.add(post);
         }
         postRepository.saveAll(posts);
@@ -51,10 +58,10 @@ class PostServiceTest {
     @DisplayName("fetchjoin으로 게시글 가져옴")
     void fetchJoin_getPost()throws Exception{
         List<Post> post = postRepository.findAllFetchJoin();
-        List<String> comments = postService.findAllSubjectNamesByJoinFetch();
+       // List<String> comments = postService.findAllSubjectNamesByJoinFetch();
 
         assertThat(post.size()).isEqualTo(10);
-        assertThat(comments.size()).isEqualTo(10);
+        //assertThat(comments.size()).isEqualTo(10);
     }
 
     @Test
@@ -62,22 +69,28 @@ class PostServiceTest {
     void entityGraph()throws Exception{
 
         List<Post> post = postRepository.findAllEntityGraph();
-        List<String> comments = postService.findAllSubjectNamesByEntityGraph();
-
         assertThat(post.size()).isEqualTo(10);
-        assertThat(comments.size()).isEqualTo(10);
 
     }
     
     @Test
-    @DisplayName("distinct")
+    @DisplayName("distinct_FetchJoin")
     void distinct()throws Exception{
         //given
-        System.out.println("조회 시작");
         List<Post> posts = postRepository.findAllJoinFetchDistinct();
 
         //then
-        System.out.println("조회 끝");
         assertThat(posts.size()).isEqualTo(10);
+        System.out.println("post size : " + posts.size());
+    }
+    @Test
+    @DisplayName("distinct_EntityGraph")
+    void distinct_EntityGraph()throws Exception{
+        //given
+        List<Post> posts = postRepository.findAllEntityGraphDistinct();
+
+        //then
+        assertThat(posts.size()).isEqualTo(10);
+        System.out.println("post size : " + posts.size());
     }
 }

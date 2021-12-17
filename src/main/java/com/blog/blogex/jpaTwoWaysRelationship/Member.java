@@ -2,7 +2,7 @@ package com.blog.blogex.jpaTwoWaysRelationship;
 
 import javax.persistence.*;
 
-//@Entity
+@Entity
 public class Member {
     @Id
     @GeneratedValue

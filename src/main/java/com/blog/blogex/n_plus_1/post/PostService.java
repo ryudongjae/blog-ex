@@ -23,7 +23,8 @@ public class PostService {
 
     private List<String> extractSubjectNames(List<Post> posts) {
         log.info(">>>>>>>>[모든 댓글을 추출한다]<<<<<<<<<");
-        log.info("Comments Size : {}", posts.size());
+        log.info("posts Size : {}", posts.size());
+
 
         return posts.stream()
                 .map(a -> a.getComments().get(0).getContent())
@@ -32,22 +33,22 @@ public class PostService {
 
 
     @Transactional(readOnly = true)
-    public List<String> findAllSubjectNamesByJoinFetch() {
+    public List<String> findAllCommentsByJoinFetch() {
         return extractSubjectNames(postRepository.findAllFetchJoin());
     }
 
     @Transactional(readOnly = true)
-    public List<String> findAllSubjectNamesByEntityGraph() {
+    public List<String> findAllCommentsByEntityGraph() {
         return extractSubjectNames(postRepository.findAllEntityGraph());
     }
 
     @Transactional(readOnly = true)
-    public List<String> findAllSubjectNamesByJoinFetchDistinct() {
+    public List<String> findAllCommentsByJoinFetchDistinct() {
         return extractSubjectNames(postRepository.findAllJoinFetchDistinct());
     }
 
     @Transactional(readOnly = true)
-    public List<String> findAllSubjectNamesByEntityGraphDistinct() {
+    public List<String> findAllCommentsByEntityGraphDistinct() {
         return extractSubjectNames(postRepository.findAllEntityGraphDistinct());
     }
 }

@@ -35,4 +35,5 @@ public interface PostRepository extends JpaRepository<Post,Long> {
     @EntityGraph(attributePaths = "comments")
     @Query("select DISTINCT a from Post a")
     List<Post> findAllEntityGraphDistinct();
+
 }
