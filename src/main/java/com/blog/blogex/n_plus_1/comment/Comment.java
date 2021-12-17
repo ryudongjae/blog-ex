@@ -17,13 +17,17 @@ public class Comment {
 
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
     private Post post;
 
     @Builder
     public Comment(String content, Post post) {
         this.content = content;
+        this.post = post;
+    }
+
+    public void updatePost(Post post){
         this.post = post;
     }
 }

@@ -4,6 +4,7 @@ import com.blog.blogex.n_plus_1.comment.Comment;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,8 +16,8 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-
-    public List<String> findAllSubjectNames(){
+    @Transactional(readOnly = true)
+    public List<String> findAllComments() {
         return extractSubjectNames(postRepository.findAll());
     }
 
@@ -29,4 +30,24 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
+
+    @Transactional(readOnly = true)
+    public List<String> findAllSubjectNamesByJoinFetch() {
+        return extractSubjectNames(postRepository.findAllFetchJoin());
+    }
+
+    @Transactional(readOnly = true)
+    public List<String> findAllSubjectNamesByEntityGraph() {
+        return extractSubjectNames(postRepository.findAllEntityGraph());
+    }
+
+    @Transactional(readOnly = true)
+    public List<String> findAllSubjectNamesByJoinFetchDistinct() {
+        return extractSubjectNames(postRepository.findAllJoinFetchDistinct());
+    }
+
+    @Transactional(readOnly = true)
+    public List<String> findAllSubjectNamesByEntityGraphDistinct() {
+        return extractSubjectNames(postRepository.findAllEntityGraphDistinct());
+    }
 }

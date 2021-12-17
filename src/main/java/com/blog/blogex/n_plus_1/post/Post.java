@@ -21,17 +21,19 @@ public class Post {
 
     private String name;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Comment> comments = new ArrayList<>();
 
     @Builder
     public Post(String name, List<Comment> comments) {
         this.name = name;
-        this.comments = comments;
+        if(comments != null){
+            this.comments = comments;
+        }
     }
 
     public void addComment(Comment comment){
         this.comments.add(comment);
+        comment.updatePost(this);
     }
 }

@@ -1,14 +1,16 @@
 package com.blog.blogex.n_plus_1.post;
 
 import com.blog.blogex.n_plus_1.comment.Comment;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
+
 
 @SpringBootTest
 class PostServiceTest {
@@ -19,11 +21,8 @@ class PostServiceTest {
     @Autowired
     private PostService postService;
 
-    @AfterEach
-    public void cleanAll(){
-        postRepository.deleteAll();
-    }
 
+    @BeforeEach
     public void setUp(){
         List<Post>posts = new ArrayList<>();
 
@@ -39,4 +38,46 @@ class PostServiceTest {
         postRepository.saveAll(posts);
     }
 
+
+    @Test
+    @DisplayName("게시글 조회시 댓글 조회 N+1 발생")
+    void N_plus_1_O()throws Exception{
+        List<String> comments = postService.findAllComments();
+        assertThat(comments.size()).isEqualTo(10);
+
+    }
+
+    @Test
+    @DisplayName("fetchjoin으로 게시글 가져옴")
+    void fetchJoin_getPost()throws Exception{
+        List<Post> post = postRepository.findAllFetchJoin();
+        List<String> comments = postService.findAllSubjectNamesByJoinFetch();
+
+        assertThat(post.size()).isEqualTo(10);
+        assertThat(comments.size()).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("게시글 여러개를 EntityGraph 로 가져온다.")
+    void entityGraph()throws Exception{
+
+        List<Post> post = postRepository.findAllEntityGraph();
+        List<String> comments = postService.findAllSubjectNamesByEntityGraph();
+
+        assertThat(post.size()).isEqualTo(10);
+        assertThat(comments.size()).isEqualTo(10);
+
+    }
+    
+    @Test
+    @DisplayName("distinct")
+    void distinct()throws Exception{
+        //given
+        System.out.println("조회 시작");
+        List<Post> posts = postRepository.findAllJoinFetchDistinct();
+
+        //then
+        System.out.println("조회 끝");
+        assertThat(posts.size()).isEqualTo(10);
+    }
 }
