@@ -1,4 +1,4 @@
-package com.financialboard.service;
+package com.blog.blogex.category.service;
 
 import com.blog.blogex.category.dto.CategoryDto;
 import com.blog.blogex.category.entity.Category;
