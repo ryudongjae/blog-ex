@@ -3,6 +3,7 @@ package com.blog.blogex.dirtychecking;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.catalina.LifecycleState;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor
+@DynamicUpdate
 public class Payment {
 
     @Id
