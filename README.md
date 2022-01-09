@@ -11,3 +11,4 @@
 * __JPA 양방향 매핑(무한 루프)__ : [블로그 보기](https://jarvics.tistory.com/87)
 * __JPA N + 1__ : [블로그 보기](https://jarvics.tistory.com/88)
 * __JPA Dirty Checking(더티체킹)__ : [블로그 보기](https://jarvics.tistory.com/89)
+* __Transaction Isolation(트랜잭션 격리수준)__ : [블로그 보기](https://jarvics.tistory.com/92)
