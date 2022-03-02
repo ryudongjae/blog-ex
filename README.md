@@ -12,3 +12,8 @@
 * __JPA N + 1__ : [블로그 보기](https://jarvics.tistory.com/88)
 * __JPA Dirty Checking(더티체킹)__ : [블로그 보기](https://jarvics.tistory.com/89)
 * __Transaction Isolation(트랜잭션 격리수준)__ : [블로그 보기](https://jarvics.tistory.com/92)
+* __빅데이터 처리__ : [블로그 보기](https://jarvics.tistory.com/99)
+* __DB Partitioning__ : [블로그 보기](https://jarvics.tistory.com/100)
+* __[Mybatis]Association과 Collection__ : [블로그 보기](https://jarvics.tistory.com/103)
+* __[MYSQL] MYSQL Partition - 테이블 분할__ : [블로그 보기](https://jarvics.tistory.com/104)
+* __Code Refactoring__ : [블로그 보기](https://jarvics.tistory.com/105)
