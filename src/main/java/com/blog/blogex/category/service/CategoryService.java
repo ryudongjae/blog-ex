@@ -14,33 +14,33 @@ import java.util.List;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
-
-    @Transactional
-    public void createCategory(CategoryDto.SaveRequest request){
-        Boolean existByName = categoryRepository.existsByCategoryName(request.getCategoryName());
-        if (existByName){
-            throw new IllegalArgumentException("카테고리 중복");
-        }
-
-        if (request.getParentCategory() == null){
-            CategoryDto.SaveRequest rootCategory = CategoryDto.SaveRequest.builder()
-                    .categoryName(request.getCategoryName())
-                    .parentCategory("대분류")
-                    .build();
-
-            categoryRepository.save(rootCategory.toEntity());
-        }else{
-            String parentCategory1 = request.getParentCategory();
-            Category parentCategory = categoryRepository.findByCategoryName(parentCategory1)
-                    .orElseThrow();
-            Category category = Category.builder()
-                    .categoryName(request.getCategoryName())
-                    .parentCategory(parentCategory)
-                    .build();
-            parentCategory.getChildCategory().add(request.toEntity());
-            categoryRepository.save(category);
-        }
-    }
+//
+//    @Transactional
+//    public void createCategory(CategoryDto.SaveRequest request){
+//        Boolean existByName = categoryRepository.existsByCategoryName(request.getCategoryName());
+//        if (existByName){
+//            throw new IllegalArgumentException("카테고리 중복");
+//        }
+//
+//        if (request.getParentCategory() == null){
+//            CategoryDto.SaveRequest rootCategory = CategoryDto.SaveRequest.builder()
+//                    .categoryName(request.getCategoryName())
+//                    .parentCategory("대분류")
+//                    .build();
+//
+//            categoryRepository.save(rootCategory.toEntity());
+//        }else{
+//            String parentCategory1 = request.getParentCategory();
+//            Category parentCategory = categoryRepository.findByCategoryName(parentCategory1)
+//                    .orElseThrow();
+//            Category category = Category.builder()
+//                    .categoryName(request.getCategoryName())
+//                    .parentCategory(parentCategory)
+//                    .build();
+//            parentCategory.getChildCategory().add(request.toEntity());
+//            categoryRepository.save(category);
+//        }
+//    }
 
     @Transactional(readOnly = true)
     public List<Category> categories(){

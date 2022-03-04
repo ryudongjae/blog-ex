@@ -17,11 +17,11 @@ public class CategoryApiController {
 
     private final CategoryService categoryService;
 
-    @PostMapping
-    public ResponseEntity<Void> saveCategory(@Valid @RequestBody CategoryDto.SaveRequest request){
-        categoryService.createCategory(request);
-        return OK;
-    }
+//    @PostMapping
+//    public ResponseEntity<Void> saveCategory(@Valid @RequestBody CategoryDto.SaveRequest request){
+//        categoryService.createCategory(request);
+//        return OK;
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<CategoryDto.CategoryResponse> getCategoryById(@PathVariable(name = "id") Long categoryId){
