@@ -17,3 +17,5 @@
 * __[Mybatis]Association과 Collection__ : [블로그 보기](https://jarvics.tistory.com/103)
 * __[MYSQL] MYSQL Partition - 테이블 분할__ : [블로그 보기](https://jarvics.tistory.com/104)
 * __Code Refactoring__ : [블로그 보기](https://jarvics.tistory.com/105)
+* __[MYBATIS] choose 절을 이용한 DynamicSQL__ : [블로그 보기](https://jarvics.tistory.com/106)
+* __[JAVA]반복문 안에서 List 요소 삭제__ : [블로그 보기](https://jarvics.tistory.com/107)
